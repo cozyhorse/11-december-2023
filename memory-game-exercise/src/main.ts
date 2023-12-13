@@ -12,6 +12,7 @@ class Memory {
   }
 
    addCardListeners(): void {
+    this.shuffleCards();
     //Loop through cards
     this.cards.forEach((card) => {
       console.log(card);
@@ -22,6 +23,7 @@ class Memory {
     });
   }
 
+  
    flipCard(card: HTMLElement): void {
     //Check if card doesn't have class flip and if flippedcards is less than 2
     if (!card.classList.contains("flip") && this.flippedCards.length < 2) {
@@ -33,7 +35,7 @@ class Memory {
     if (this.flippedCards.length === 2) {
       setTimeout(() => {
         this.checkMatch();
-      }, 500);
+      }, 800);
     }
   }
 
@@ -61,6 +63,16 @@ class Memory {
     if (document.querySelectorAll(".match").length === this.cards.length) {
       this.showWin();
     }
+  }
+
+  //Shuffle cards
+  shuffleCards(): void {
+    this.cards.forEach((card) => {
+        const memoryCard = card as HTMLElement;
+        const position = Math.floor(Math.random() * this.cards.length);
+        console.log("pos", position.toString());
+        memoryCard.style.order = position.toString()
+    })
   }
 
    showWin(): void {

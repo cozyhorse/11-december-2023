@@ -7,6 +7,7 @@ class Memory {
         this.addCardListeners();
     }
     addCardListeners() {
+        this.shuffleCards();
         //Loop through cards
         this.cards.forEach((card) => {
             console.log(card);
@@ -27,7 +28,7 @@ class Memory {
         if (this.flippedCards.length === 2) {
             setTimeout(() => {
                 this.checkMatch();
-            }, 500);
+            }, 800);
         }
     }
     //Check "selected cards"
@@ -55,6 +56,15 @@ class Memory {
         if (document.querySelectorAll(".match").length === this.cards.length) {
             this.showWin();
         }
+    }
+    //Shuffle cards
+    shuffleCards() {
+        this.cards.forEach((card) => {
+            const memoryCard = card;
+            const position = Math.floor(Math.random() * this.cards.length);
+            console.log("pos", position.toString());
+            memoryCard.style.order = position.toString();
+        });
     }
     showWin() {
         this.overlay.classList.add("show");
